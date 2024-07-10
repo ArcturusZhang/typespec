@@ -113,7 +113,7 @@ namespace Microsoft.Generator.CSharp.Providers
         {
             // find the base model
             var baseType = Type.BaseType;
-            var baseModel = baseType != null ? CodeModelPlugin.Instance.TypeFactory.GetProvider(baseType) : null;
+            var baseModel = baseType != null ? CodeModelPlugin.Instance.TypeFactory.GetProvider(baseType)?.CanonicalType : null;
             var baseProperties = baseModel?.Properties ?? [];
             var parameterCapacity = baseProperties.Count + Properties.Count;
             var baseParameters = new List<ParameterProvider>(baseProperties.Count);
@@ -191,6 +191,11 @@ namespace Microsoft.Generator.CSharp.Providers
             }
 
             return methodBodyStatements;
+        }
+
+        protected override TypeProvider GetCanonicalType()
+        {
+            return new CanonicalViewProvider(this);
         }
     }
 }

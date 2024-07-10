@@ -185,5 +185,10 @@ namespace Microsoft.Generator.CSharp.Providers
                 _fields = fields;
             }
         }
+
+        private TypeProvider? _canonicalType;
+        public TypeProvider CanonicalType => _canonicalType ??= GetCanonicalType();
+
+        protected virtual TypeProvider GetCanonicalType() => this; // by default, it only returns itself.
     }
 }
