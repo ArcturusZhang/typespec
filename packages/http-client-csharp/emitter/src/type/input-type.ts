@@ -6,7 +6,16 @@ import { DateTimeKnownEncoding, DurationKnownEncoding } from "@typespec/compiler
 import { InputEnumTypeValue } from "./input-enum-type-value.js";
 import { InputModelProperty } from "./input-model-property.js";
 
-interface InputTypeBase {
+interface InputDecoratedType {
+  Decorators: InputDecoratorInfo[];
+}
+
+export interface InputDecoratorInfo {
+  Name: string;
+  Arguments: Record<string, any>;
+}
+
+interface InputTypeBase extends InputDecoratedType {
   Kind: string;
   Description?: string;
   Deprecation?: string;

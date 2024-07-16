@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
+  DecoratorInfo,
   SdkArrayType,
   SdkBodyModelPropertyType,
   SdkBuiltInType,
@@ -14,6 +15,7 @@ import {
   SdkEnumValueType,
   SdkModelPropertyType,
   SdkModelType,
+  SdkTupleType,
   SdkType,
   SdkUnionType,
   UsageFlags,
@@ -26,6 +28,7 @@ import { InputModelProperty } from "../type/input-model-property.js";
 import {
   InputArrayType,
   InputDateTimeType,
+  InputDecoratorInfo,
   InputDictionaryType,
   InputDurationType,
   InputEnumType,
@@ -49,9 +52,9 @@ export function fromSdkType(
   if (sdkType.kind === "nullable") {
     const inputType = fromSdkType(sdkType.type, context, models, enums);
     return {
-      Kind: "nullable",
+      ...fromSdkBaseType(sdkType),
       Type: inputType,
-    } as InputNullableType;
+    };
   }
   if (sdkType.kind === "model") return fromSdkModelType(sdkType, context, models, enums);
   if (sdkType.kind === "enum") return fromSdkEnumType(sdkType, context, enums);
@@ -65,7 +68,7 @@ export function fromSdkType(
   if (sdkType.kind === "utcDateTime" || sdkType.kind === "offsetDateTime")
     return fromSdkDateTimeType(sdkType);
   if (sdkType.kind === "duration") return fromSdkDurationType(sdkType as SdkDurationType);
-  if (sdkType.kind === "tuple") return fromTupleType();
+  if (sdkType.kind === "tuple") return fromTupleType(sdkType);
   // TODO -- only in operations we could have these types, considering we did not adopt getAllOperations from TCGC yet, this should be fine.
   // we need to resolve these conversions when we adopt getAllOperations
   if (sdkType.kind === "credential") throw new Error("Credential type is not supported yet.");
@@ -84,7 +87,7 @@ export function fromSdkModelType(
   let inputModelType = models.get(modelTypeName);
   if (!inputModelType) {
     inputModelType = {
-      Kind: "model",
+      ...fromSdkBaseType(modelType),
       Name: modelTypeName,
       CrossLanguageDefinitionId: modelType.crossLanguageDefinitionId,
       Access: getAccessOverride(
@@ -92,8 +95,6 @@ export function fromSdkModelType(
         modelType.__raw as Model
       ) /* when tcgc provide a way to identify if the access is override or not, we can get the accessibility from the modelType.access */,
       Usage: fromUsageFlags(modelType.usage),
-      Deprecation: modelType.deprecation,
-      Description: modelType.description,
       DiscriminatorValue: modelType.discriminatorValue,
     } as InputModelType;
 
@@ -199,7 +200,7 @@ export function fromSdkEnumType(
   let inputEnumType = enums.get(enumName);
   if (inputEnumType === undefined) {
     const newInputEnumType: InputEnumType = {
-      Kind: "enum",
+      ...fromSdkBaseType(enumType),
       Name: enumName,
       CrossLanguageDefinitionId: enumType.crossLanguageDefinitionId,
       ValueType: fromSdkBuiltInType(enumType.valueType),
@@ -208,8 +209,6 @@ export function fromSdkEnumType(
         context,
         enumType.__raw as any
       ) /* when tcgc provide a way to identify if the access is override or not, we can get the accessibility from the enumType.access,*/,
-      Deprecated: enumType.deprecation,
-      Description: enumType.description,
       IsExtensible: enumType.isFixed ? false : true,
       Usage: fromUsageFlags(enumType.usage),
     };
@@ -221,7 +220,7 @@ export function fromSdkEnumType(
 
 function fromSdkDateTimeType(dateTimeType: SdkDatetimeType): InputDateTimeType {
   return {
-    Kind: dateTimeType.kind,
+    ...fromSdkBaseType(dateTimeType),
     Encode: dateTimeType.encode,
     WireType: fromSdkBuiltInType(dateTimeType.wireType),
   };
@@ -229,16 +228,17 @@ function fromSdkDateTimeType(dateTimeType: SdkDatetimeType): InputDateTimeType {
 
 function fromSdkDurationType(durationType: SdkDurationType): InputDurationType {
   return {
-    Kind: durationType.kind,
+    ...fromSdkBaseType(durationType),
     Encode: durationType.encode,
     WireType: fromSdkBuiltInType(durationType.wireType),
   };
 }
 
 // TODO: tuple is not officially supported
-function fromTupleType(): InputPrimitiveType {
+function fromTupleType(tupleType: SdkTupleType): InputPrimitiveType {
   return {
     Kind: "any",
+    Decorators: [],
   };
 }
 
@@ -262,7 +262,7 @@ function fromUnionType(
   }
 
   return {
-    Kind: "union",
+    ...fromSdkBaseType(union),
     Name: union.name,
     VariantTypes: variantTypes,
   };
@@ -368,6 +368,37 @@ function fromSdkArrayType(
     ValueType: fromSdkType(arrayType.valueType, context, models, enums),
     CrossLanguageDefinitionId: arrayType.crossLanguageDefinitionId,
   };
+}
+
+function fromSdkBaseType<TKind extends string>(baseType: {
+  kind: TKind;
+  deprecation?: string;
+  description?: string;
+  details?: string;
+  decorators: DecoratorInfo[];
+}) : {
+  Kind: TKind;
+  Description?: string;
+  Deprecation?: string;
+  Decorators: InputDecoratorInfo[];
+} {
+  const decorators: InputDecoratorInfo[] = [];
+  for (const decorator of baseType.decorators) {
+    decorators.push(fromSdkDecorator(decorator));
+  }
+  return {
+    Kind: baseType.kind,
+    Description: baseType.description,
+    Deprecation: baseType.deprecation,
+    Decorators: decorators,
+  };
+
+  function fromSdkDecorator(decorator: DecoratorInfo): InputDecoratorInfo {
+    return {
+      Name: decorator.name,
+      Arguments: decorator.arguments,
+    };
+  }
 }
 
 function fromUsageFlags(usage: UsageFlags): Usage {
