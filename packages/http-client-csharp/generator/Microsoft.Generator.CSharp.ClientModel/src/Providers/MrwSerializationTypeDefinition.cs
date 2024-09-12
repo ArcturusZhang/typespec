@@ -85,7 +85,7 @@ namespace Microsoft.Generator.CSharp.ClientModel.Providers
         protected override string BuildName() => _model.Name;
 
         protected override CSharpType BuildType() => _model.Type;
-        
+
         protected override IReadOnlyList<AttributeStatement> BuildAttributes()
         {
             if (_model.DeclarationModifiers.HasFlag(TypeSignatureModifiers.Abstract))
