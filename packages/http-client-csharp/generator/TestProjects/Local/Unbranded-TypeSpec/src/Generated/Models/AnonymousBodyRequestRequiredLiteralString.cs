@@ -4,9 +4,8 @@
 
 using System;
 using System.ComponentModel;
-using UnbrandedTypeSpec;
 
-namespace UnbrandedTypeSpec.Models
+namespace UnbrandedTypeSpec
 {
     /// <summary> The AnonymousBodyRequest_requiredLiteralString. </summary>
     public readonly partial struct AnonymousBodyRequestRequiredLiteralString : IEquatable<AnonymousBodyRequestRequiredLiteralString>

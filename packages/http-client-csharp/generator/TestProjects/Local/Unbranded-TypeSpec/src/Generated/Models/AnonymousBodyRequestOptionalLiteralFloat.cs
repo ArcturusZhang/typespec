@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace UnbrandedTypeSpec.Models
+namespace UnbrandedTypeSpec
 {
     /// <summary> The AnonymousBodyRequest_optionalLiteralFloat. </summary>
     public readonly partial struct AnonymousBodyRequestOptionalLiteralFloat : IEquatable<AnonymousBodyRequestOptionalLiteralFloat>

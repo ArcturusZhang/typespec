@@ -6,7 +6,7 @@ using Microsoft.Generator.CSharp.Providers;
 
 namespace Microsoft.Generator.CSharp.ClientModel.StubLibrary
 {
-    internal class NoModelNamespace : ScmLibraryVisitor
+    internal class NoModelNamespaceVisitor : ScmLibraryVisitor
     {
         protected override ModelProvider? Visit(InputModelType model, ModelProvider? type)
         {

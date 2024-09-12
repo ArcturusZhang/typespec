@@ -8,7 +8,7 @@ using Microsoft.Generator.CSharp.Statements;
 
 namespace Microsoft.Generator.CSharp.ClientModel.StubLibrary
 {
-    internal class UriComment : ScmLibraryVisitor
+    internal class UriCommentVisitor : ScmLibraryVisitor
     {
         protected override MethodProvider? Visit(MethodProvider method)
         {

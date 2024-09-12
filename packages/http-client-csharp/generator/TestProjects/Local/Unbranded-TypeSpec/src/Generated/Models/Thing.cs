@@ -6,9 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using UnbrandedTypeSpec;
 
-namespace UnbrandedTypeSpec.Models
+namespace UnbrandedTypeSpec
 {
     /// <summary> A model with a few properties of literal types. </summary>
     public partial class Thing
@@ -101,16 +100,16 @@ namespace UnbrandedTypeSpec.Models
         public BinaryData RequiredUnion { get; set; }
 
         /// <summary> required literal string. </summary>
-        public ThingRequiredLiteralString RequiredLiteralString { get; } = "accept";
+        public ThingRequiredLiteralString RequiredLiteralString { get; init; } = "accept";
 
         /// <summary> required literal int. </summary>
-        public ThingRequiredLiteralInt RequiredLiteralInt { get; } = 123;
+        public ThingRequiredLiteralInt RequiredLiteralInt { get; init; } = 123;
 
         /// <summary> required literal float. </summary>
-        public ThingRequiredLiteralFloat RequiredLiteralFloat { get; } = 1.23F;
+        public ThingRequiredLiteralFloat RequiredLiteralFloat { get; init; } = 1.23F;
 
         /// <summary> required literal bool. </summary>
-        public bool RequiredLiteralBool { get; } = false;
+        public bool RequiredLiteralBool { get; init; } = false;
 
         /// <summary> optional literal string. </summary>
         public ThingOptionalLiteralString? OptionalLiteralString { get; set; }

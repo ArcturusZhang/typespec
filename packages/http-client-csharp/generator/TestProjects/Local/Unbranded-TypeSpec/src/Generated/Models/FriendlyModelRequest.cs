@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace UnbrandedTypeSpec.Models
+namespace UnbrandedTypeSpec
 {
     /// <summary> The FriendlyModelRequest. </summary>
     internal partial class FriendlyModelRequest

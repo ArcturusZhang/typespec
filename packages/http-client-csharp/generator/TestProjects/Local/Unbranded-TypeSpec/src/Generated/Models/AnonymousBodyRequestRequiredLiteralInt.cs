@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace UnbrandedTypeSpec.Models
+namespace UnbrandedTypeSpec
 {
     /// <summary> The AnonymousBodyRequest_requiredLiteralInt. </summary>
     public readonly partial struct AnonymousBodyRequestRequiredLiteralInt : IEquatable<AnonymousBodyRequestRequiredLiteralInt>
