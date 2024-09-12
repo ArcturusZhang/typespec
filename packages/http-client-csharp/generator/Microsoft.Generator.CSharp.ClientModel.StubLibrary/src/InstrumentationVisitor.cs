@@ -12,7 +12,7 @@ namespace Microsoft.Generator.CSharp.ClientModel.StubLibrary
 {
     internal class InstrumentationVisitor : ScmLibraryVisitor
     {
-        protected override MethodProvider? Visit(TypeProvider enclosingType, MethodProvider method)
+        protected override MethodProvider? Visit(MethodProvider method)
         {
             if (!method.IsServiceCall())
                 return method;

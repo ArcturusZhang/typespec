@@ -8,7 +8,7 @@ namespace Microsoft.Generator.CSharp.ClientModel.StubLibrary
 {
     internal class NoModelNamespace : ScmLibraryVisitor
     {
-        protected override TypeProvider? Visit(InputModelType model, TypeProvider? type)
+        protected override ModelProvider? Visit(InputModelType model, ModelProvider? type)
         {
             type?.Update(nameSpace: StubLibraryPlugin.Instance.Configuration.RootNamespace);
             return type;
