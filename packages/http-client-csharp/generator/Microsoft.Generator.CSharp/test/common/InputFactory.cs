@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Generator.CSharp.Input;
 
 namespace Microsoft.Generator.CSharp.Tests.Common
@@ -12,17 +13,17 @@ namespace Microsoft.Generator.CSharp.Tests.Common
         {
             public static InputEnumTypeValue Int32(string name, int value)
             {
-                return new InputEnumTypeValue(name, value, $"{name} description");
+                return new InputEnumTypeValue(name, value, InputPrimitiveType.Int32, $"{name} description");
             }
 
             public static InputEnumTypeValue Float32(string name, float value)
             {
-                return new InputEnumTypeValue(name, value, $"{name} description");
+                return new InputEnumTypeValue(name, value, InputPrimitiveType.Float32, $"{name} description");
             }
 
             public static InputEnumTypeValue String(string name, string value)
             {
-                return new InputEnumTypeValue(name, value, $"{name} description");
+                return new InputEnumTypeValue(name, value, InputPrimitiveType.String, $"{name} description");
             }
         }
 
@@ -55,16 +56,18 @@ namespace Microsoft.Generator.CSharp.Tests.Common
         public static InputParameter Parameter(
         string name,
         InputType type,
+        string? nameInRequest = null,
         InputConstant? defaultValue = null,
         RequestLocation location = RequestLocation.Body,
         bool isRequired = false,
         InputOperationParameterKind kind = InputOperationParameterKind.Method,
         bool isEndpoint = false,
-        bool isResourceParameter = false)
+        bool isResourceParameter = false,
+        bool isContentType = false)
         {
             return new InputParameter(
                 name,
-                name,
+                nameInRequest ?? name,
                 $"{name} description",
                 type,
                 location,
@@ -73,7 +76,7 @@ namespace Microsoft.Generator.CSharp.Tests.Common
                 isRequired,
                 false,
                 isResourceParameter,
-                false,
+                isContentType,
                 isEndpoint,
                 false,
                 false,
@@ -108,7 +111,7 @@ namespace Microsoft.Generator.CSharp.Tests.Common
                 $"{name} description",
                 usage,
                 underlyingType,
-                values is null ? [new InputEnumTypeValue("Value", 1, "Value description")] : [.. values],
+                values is null ? [new InputEnumTypeValue("Value", 1, InputPrimitiveType.Int32, "Value description")] : [.. values],
                 isExtensible);
         }
 
@@ -118,12 +121,13 @@ namespace Microsoft.Generator.CSharp.Tests.Common
             bool isRequired = false,
             bool isReadOnly = false,
             bool isDiscriminator = false,
-            string? wireName = null)
+            string? wireName = null,
+            string? description = null)
         {
             return new InputModelProperty(
                 name,
                 wireName ?? name.ToVariableName(),
-                $"Description for {name}",
+                description ?? $"Description for {name}",
                 type,
                 isRequired,
                 isReadOnly,
@@ -134,11 +138,16 @@ namespace Microsoft.Generator.CSharp.Tests.Common
         public static InputModelType Model(
             string name,
             string access = "public",
-            InputModelTypeUsage usage = InputModelTypeUsage.Output | InputModelTypeUsage.Input,
+            InputModelTypeUsage usage = InputModelTypeUsage.Output | InputModelTypeUsage.Input | InputModelTypeUsage.Json,
             IEnumerable<InputModelProperty>? properties = null,
             InputModelType? baseModel = null,
-            bool modelAsStruct = false)
+            bool modelAsStruct = false,
+            string? discriminatedKind = null,
+            InputType? additionalProperties = null,
+            IDictionary<string, InputModelType>? discriminatedModels = null,
+            IEnumerable<InputModelType>? derivedModels = null)
         {
+            IEnumerable<InputModelProperty> propertiesList = properties ?? [Property("StringProperty", InputPrimitiveType.String)];
             return new InputModelType(
                 name,
                 name,
@@ -146,13 +155,13 @@ namespace Microsoft.Generator.CSharp.Tests.Common
                 null,
                 $"{name} description",
                 usage,
-                properties is null ? [InputFactory.Property("StringProperty", InputPrimitiveType.String)] : [.. properties],
+                [.. propertiesList],
                 baseModel,
-                [],
-                null,
-                null,
-                new Dictionary<string, InputModelType>(),
-                null,
+                derivedModels is null ? [] : [.. derivedModels],
+                discriminatedKind,
+                propertiesList.FirstOrDefault(p => p.IsDiscriminator),
+                discriminatedModels is null ? new Dictionary<string, InputModelType>() : discriminatedModels.AsReadOnly(),
+                additionalProperties,
                 modelAsStruct);
         }
 
