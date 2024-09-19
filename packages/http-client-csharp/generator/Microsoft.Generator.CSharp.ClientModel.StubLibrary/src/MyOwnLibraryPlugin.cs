@@ -7,14 +7,14 @@ using System.ComponentModel.Composition;
 namespace Microsoft.Generator.CSharp.ClientModel.StubLibrary
 {
     [Export(typeof(CodeModelPlugin))]
-    [ExportMetadata("PluginName", nameof(StubLibraryPlugin))]
-    public class StubLibraryPlugin : ClientModelPlugin
+    [ExportMetadata("PluginName", nameof(MyOwnLibraryPlugin))]
+    public class MyOwnLibraryPlugin : ClientModelPlugin
     {
-        private static StubLibraryPlugin? _instance;
-        internal static StubLibraryPlugin Instance => _instance ?? throw new InvalidOperationException("ClientModelPlugin is not loaded.");
+        private static MyOwnLibraryPlugin? _instance;
+        internal static MyOwnLibraryPlugin Instance => _instance ?? throw new InvalidOperationException("ClientModelPlugin is not loaded.");
 
         [ImportingConstructor]
-        public StubLibraryPlugin(GeneratorContext context) : base(context)
+        public MyOwnLibraryPlugin(GeneratorContext context) : base(context)
         {
             _instance = this;
         }

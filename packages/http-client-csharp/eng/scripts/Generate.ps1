@@ -20,8 +20,7 @@ if (-not $LaunchOnly) {
         $unbrandedTypespecTestProject = Join-Path $testProjectsLocalDir "Unbranded-TypeSpec"
         $unbrandedTypespecTestProject = $unbrandedTypespecTestProject
 
-        Invoke (Get-TspCommand "$unbrandedTypespecTestProject/Unbranded-TypeSpec.tsp" $unbrandedTypespecTestProject  $stubbed)
-
+        Invoke "npx tsp compile $unbrandedTypespecTestProject/Unbranded-TypeSpec.tsp --trace @typespec/http-client-csharp --emit @typespec/http-client-csharp --option @typespec/http-client-csharp.emitter-output-dir=$unbrandedTypespecTestProject --option @typespec/http-client-csharp.save-inputs=true --option @typespec/http-client-csharp.plugin-name=MyOwnLibraryPlugin"
         # exit if the generation failed
         if ($LASTEXITCODE -ne 0) {
             exit $LASTEXITCODE

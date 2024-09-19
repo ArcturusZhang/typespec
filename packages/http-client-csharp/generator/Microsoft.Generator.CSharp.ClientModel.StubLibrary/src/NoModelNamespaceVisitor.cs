@@ -10,13 +10,13 @@ namespace Microsoft.Generator.CSharp.ClientModel.StubLibrary
     {
         protected override ModelProvider? Visit(InputModelType model, ModelProvider? type)
         {
-            type?.Update(nameSpace: StubLibraryPlugin.Instance.Configuration.RootNamespace);
+            type?.Update(nameSpace: MyOwnLibraryPlugin.Instance.Configuration.RootNamespace);
             return type;
         }
 
         protected override TypeProvider? Visit(InputEnumType enumType, TypeProvider? type)
         {
-            type?.Update(nameSpace: StubLibraryPlugin.Instance.Configuration.RootNamespace);
+            type?.Update(nameSpace: MyOwnLibraryPlugin.Instance.Configuration.RootNamespace);
             return type;
         }
 
@@ -24,7 +24,7 @@ namespace Microsoft.Generator.CSharp.ClientModel.StubLibrary
         {
             if (type.Type.Namespace.EndsWith(".Models"))
             {
-                type.Update(nameSpace: StubLibraryPlugin.Instance.Configuration.RootNamespace);
+                type.Update(nameSpace: MyOwnLibraryPlugin.Instance.Configuration.RootNamespace);
             }
             return type;
         }
