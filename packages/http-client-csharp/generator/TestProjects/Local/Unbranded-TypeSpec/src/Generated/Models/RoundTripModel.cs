@@ -6,14 +6,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using UnbrandedTypeSpec;
 
-namespace UnbrandedTypeSpec
+namespace UnbrandedTypeSpec.Models
 {
     /// <summary> this is a roundtrip model. </summary>
     public partial class RoundTripModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private protected IDictionary<string, BinaryData> _additionalBinaryDataProperties;
 
         /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
@@ -55,7 +56,7 @@ namespace UnbrandedTypeSpec
             RequiredBytes = requiredBytes;
         }
 
-        internal RoundTripModel(string requiredString, int requiredInt, IList<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel, IntExtensibleEnum? intExtensibleEnum, IList<IntExtensibleEnum> intExtensibleEnumCollection, FloatExtensibleEnum? floatExtensibleEnum, FloatExtensibleEnumWithIntValue? floatExtensibleEnumWithIntValue, IList<FloatExtensibleEnum> floatExtensibleEnumCollection, FloatFixedEnum? floatFixedEnum, FloatFixedEnumWithIntValue? floatFixedEnumWithIntValue, IList<FloatFixedEnum> floatFixedEnumCollection, IntFixedEnum? intFixedEnum, IList<IntFixedEnum> intFixedEnumCollection, StringFixedEnum? stringFixedEnum, BinaryData requiredUnknown, BinaryData optionalUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, IDictionary<string, BinaryData> optionalRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown, ModelWithRequiredNullableProperties modelWithRequiredNullable, BinaryData requiredBytes, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal RoundTripModel(string requiredString, int requiredInt, IList<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel, IntExtensibleEnum? intExtensibleEnum, IList<IntExtensibleEnum> intExtensibleEnumCollection, FloatExtensibleEnum? floatExtensibleEnum, FloatExtensibleEnumWithIntValue? floatExtensibleEnumWithIntValue, IList<FloatExtensibleEnum> floatExtensibleEnumCollection, FloatFixedEnum? floatFixedEnum, FloatFixedEnumWithIntValue? floatFixedEnumWithIntValue, IList<FloatFixedEnum> floatFixedEnumCollection, IntFixedEnum? intFixedEnum, IList<IntFixedEnum> intFixedEnumCollection, StringFixedEnum? stringFixedEnum, BinaryData requiredUnknown, BinaryData optionalUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, IDictionary<string, BinaryData> optionalRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown, ModelWithRequiredNullableProperties modelWithRequiredNullable, BinaryData requiredBytes, IDictionary<string, BinaryData> additionalBinaryDataProperties)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -81,7 +82,7 @@ namespace UnbrandedTypeSpec
             ReadOnlyOptionalRecordUnknown = readOnlyOptionalRecordUnknown;
             ModelWithRequiredNullable = modelWithRequiredNullable;
             RequiredBytes = requiredBytes;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            _additionalBinaryDataProperties = additionalBinaryDataProperties;
         }
 
         /// <summary> Required string, illustrating a reference type property. </summary>
@@ -91,10 +92,10 @@ namespace UnbrandedTypeSpec
         public int RequiredInt { get; set; }
 
         /// <summary> Required collection of enums. </summary>
-        public IList<StringFixedEnum> RequiredCollection { get; init; }
+        public IList<StringFixedEnum> RequiredCollection { get; }
 
         /// <summary> Required dictionary of enums. </summary>
-        public IDictionary<string, StringExtensibleEnum> RequiredDictionary { get; init; }
+        public IDictionary<string, StringExtensibleEnum> RequiredDictionary { get; }
 
         /// <summary> Required model. </summary>
         public Thing RequiredModel { get; set; }
@@ -103,7 +104,7 @@ namespace UnbrandedTypeSpec
         public IntExtensibleEnum? IntExtensibleEnum { get; set; }
 
         /// <summary> this is a collection of int based extensible enum. </summary>
-        public IList<IntExtensibleEnum> IntExtensibleEnumCollection { get; init; }
+        public IList<IntExtensibleEnum> IntExtensibleEnumCollection { get; }
 
         /// <summary> this is a float based extensible enum. </summary>
         public FloatExtensibleEnum? FloatExtensibleEnum { get; set; }
@@ -112,7 +113,7 @@ namespace UnbrandedTypeSpec
         public FloatExtensibleEnumWithIntValue? FloatExtensibleEnumWithIntValue { get; set; }
 
         /// <summary> this is a collection of float based extensible enum. </summary>
-        public IList<FloatExtensibleEnum> FloatExtensibleEnumCollection { get; init; }
+        public IList<FloatExtensibleEnum> FloatExtensibleEnumCollection { get; }
 
         /// <summary> this is a float based fixed enum. </summary>
         public FloatFixedEnum? FloatFixedEnum { get; set; }
@@ -121,13 +122,13 @@ namespace UnbrandedTypeSpec
         public FloatFixedEnumWithIntValue? FloatFixedEnumWithIntValue { get; set; }
 
         /// <summary> this is a collection of float based fixed enum. </summary>
-        public IList<FloatFixedEnum> FloatFixedEnumCollection { get; init; }
+        public IList<FloatFixedEnum> FloatFixedEnumCollection { get; }
 
         /// <summary> this is a int based fixed enum. </summary>
         public IntFixedEnum? IntFixedEnum { get; set; }
 
         /// <summary> this is a collection of int based fixed enum. </summary>
-        public IList<IntFixedEnum> IntFixedEnumCollection { get; init; }
+        public IList<IntFixedEnum> IntFixedEnumCollection { get; }
 
         /// <summary> this is a string based fixed enum. </summary>
         public StringFixedEnum? StringFixedEnum { get; set; }
@@ -214,7 +215,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </para>
         /// </summary>
-        public IDictionary<string, BinaryData> RequiredRecordUnknown { get; init; }
+        public IDictionary<string, BinaryData> RequiredRecordUnknown { get; }
 
         /// <summary>
         /// optional record of unknown
@@ -242,7 +243,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </para>
         /// </summary>
-        public IDictionary<string, BinaryData> OptionalRecordUnknown { get; init; }
+        public IDictionary<string, BinaryData> OptionalRecordUnknown { get; }
 
         /// <summary>
         /// required readonly record of unknown
@@ -270,7 +271,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </para>
         /// </summary>
-        public IReadOnlyDictionary<string, BinaryData> ReadOnlyRequiredRecordUnknown { get; init; }
+        public IReadOnlyDictionary<string, BinaryData> ReadOnlyRequiredRecordUnknown { get; }
 
         /// <summary>
         /// optional readonly record of unknown
@@ -298,7 +299,7 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </para>
         /// </summary>
-        public IReadOnlyDictionary<string, BinaryData> ReadOnlyOptionalRecordUnknown { get; init; }
+        public IReadOnlyDictionary<string, BinaryData> ReadOnlyOptionalRecordUnknown { get; }
 
         /// <summary> this is a model with required nullable properties. </summary>
         public ModelWithRequiredNullableProperties ModelWithRequiredNullable { get; set; }

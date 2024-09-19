@@ -8,6 +8,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UnbrandedTypeSpec.Models;
 
 namespace UnbrandedTypeSpec
 {
@@ -64,25 +65,16 @@ namespace UnbrandedTypeSpec
         /// <param name="queryParameter"></param>
         /// <param name="optionalQuery"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/SayHi. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult SayHi(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(headParameter, nameof(headParameter));
-                Argument.AssertNotNull(queryParameter, nameof(queryParameter));
+            Argument.AssertNotNull(headParameter, nameof(headParameter));
+            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-                using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -97,25 +89,16 @@ namespace UnbrandedTypeSpec
         /// <param name="queryParameter"></param>
         /// <param name="optionalQuery"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/SayHiAsync. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(headParameter, nameof(headParameter));
-                Argument.AssertNotNull(queryParameter, nameof(queryParameter));
+            Argument.AssertNotNull(headParameter, nameof(headParameter));
+            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-                using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateSayHiRequest(headParameter, queryParameter, optionalQuery, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Return hi. </summary>
@@ -160,26 +143,17 @@ namespace UnbrandedTypeSpec
         /// <param name="p1"></param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/HelloAgain. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult HelloAgain(string p2, string p1, BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(p2, nameof(p2));
-                Argument.AssertNotNull(p1, nameof(p1));
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreateHelloAgainRequest(p2, p1, content, options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateHelloAgainRequest(p2, p1, content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -194,26 +168,17 @@ namespace UnbrandedTypeSpec
         /// <param name="p1"></param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/HelloAgainAsync. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> HelloAgainAsync(string p2, string p1, BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(p2, nameof(p2));
-                Argument.AssertNotNull(p1, nameof(p1));
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreateHelloAgainRequest(p2, p1, content, options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateHelloAgainRequest(p2, p1, content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Return hi again. </summary>
@@ -260,26 +225,17 @@ namespace UnbrandedTypeSpec
         /// <param name="p1"></param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/NoContentType. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult NoContentType(string p2, string p1, BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(p2, nameof(p2));
-                Argument.AssertNotNull(p1, nameof(p1));
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreateNoContentTypeRequest(p2, p1, content, options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateNoContentTypeRequest(p2, p1, content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -294,26 +250,17 @@ namespace UnbrandedTypeSpec
         /// <param name="p1"></param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/NoContentTypeAsync. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> NoContentTypeAsync(string p2, string p1, BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(p2, nameof(p2));
-                Argument.AssertNotNull(p1, nameof(p1));
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreateNoContentTypeRequest(p2, p1, content, options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateNoContentTypeRequest(p2, p1, content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -325,21 +272,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/HelloDemo2. </remarks>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult HelloDemo2(RequestOptions options)
         {
-            try
-            {
-                using PipelineMessage message = CreateHelloDemo2Request(options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateHelloDemo2Request(options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -351,21 +289,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/HelloDemo2Async. </remarks>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> HelloDemo2Async(RequestOptions options)
         {
-            try
-            {
-                using PipelineMessage message = CreateHelloDemo2Request(options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateHelloDemo2Request(options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Return hi in demo2. </summary>
@@ -394,24 +323,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/CreateLiteral. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult CreateLiteral(BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreateCreateLiteralRequest(content, options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateLiteralRequest(content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -424,24 +344,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/CreateLiteralAsync. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> CreateLiteralAsync(BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreateCreateLiteralRequest(content, options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateCreateLiteralRequest(content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Create with literal value. </summary>
@@ -477,21 +388,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/HelloLiteral. </remarks>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult HelloLiteral(RequestOptions options)
         {
-            try
-            {
-                using PipelineMessage message = CreateHelloLiteralRequest(options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateHelloLiteralRequest(options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -503,21 +405,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/HelloLiteralAsync. </remarks>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> HelloLiteralAsync(RequestOptions options)
         {
-            try
-            {
-                using PipelineMessage message = CreateHelloLiteralRequest(options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateHelloLiteralRequest(options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Send literal parameters. </summary>
@@ -546,21 +439,12 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="action"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/TopAction. </remarks>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult TopAction(DateTimeOffset action, RequestOptions options)
         {
-            try
-            {
-                using PipelineMessage message = CreateTopActionRequest(action, options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateTopActionRequest(action, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -573,21 +457,12 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="action"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/TopActionAsync. </remarks>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> TopActionAsync(DateTimeOffset action, RequestOptions options)
         {
-            try
-            {
-                using PipelineMessage message = CreateTopActionRequest(action, options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateTopActionRequest(action, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> top level method. </summary>
@@ -617,21 +492,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/TopAction2. </remarks>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult TopAction2(RequestOptions options)
         {
-            try
-            {
-                using PipelineMessage message = CreateTopAction2Request(options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateTopAction2Request(options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -643,21 +509,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/TopAction2Async. </remarks>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> TopAction2Async(RequestOptions options)
         {
-            try
-            {
-                using PipelineMessage message = CreateTopAction2Request(options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateTopAction2Request(options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -670,24 +527,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/PatchAction. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult PatchAction(BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreatePatchActionRequest(content, options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreatePatchActionRequest(content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -700,24 +548,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/PatchActionAsync. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> PatchActionAsync(BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreatePatchActionRequest(content, options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreatePatchActionRequest(content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -730,24 +569,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/AnonymousBody. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult AnonymousBody(BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreateAnonymousBodyRequest(content, options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateAnonymousBodyRequest(content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -760,24 +590,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/AnonymousBodyAsync. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> AnonymousBodyAsync(BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreateAnonymousBodyRequest(content, options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateAnonymousBodyRequest(content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> body parameter without body decorator. </summary>
@@ -796,13 +617,13 @@ namespace UnbrandedTypeSpec
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual ClientResult<Thing> AnonymousBody(string name, BinaryData requiredUnion, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, string requiredBadDescription, IEnumerable<int> requiredNullableList, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = default, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = default, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = default, bool? optionalLiteralBool = default, IEnumerable<int> optionalNullableList = default)
+        public virtual ClientResult<Thing> AnonymousBody(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingOptionalLiteralString? optionalLiteralString = default, ThingOptionalLiteralInt? optionalLiteralInt = default, ThingOptionalLiteralFloat? optionalLiteralFloat = default, bool? optionalLiteralBool = default, IEnumerable<int> optionalNullableList = default)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            AnonymousBodyRequest spreadModel = new AnonymousBodyRequest(
+            Thing spreadModel = new Thing(
                 name,
                 requiredUnion,
                 requiredLiteralString,
@@ -837,13 +658,13 @@ namespace UnbrandedTypeSpec
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async Task<ClientResult<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, string requiredBadDescription, IEnumerable<int> requiredNullableList, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = default, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = default, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = default, bool? optionalLiteralBool = default, IEnumerable<int> optionalNullableList = default)
+        public virtual async Task<ClientResult<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingOptionalLiteralString? optionalLiteralString = default, ThingOptionalLiteralInt? optionalLiteralInt = default, ThingOptionalLiteralFloat? optionalLiteralFloat = default, bool? optionalLiteralBool = default, IEnumerable<int> optionalNullableList = default)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            AnonymousBodyRequest spreadModel = new AnonymousBodyRequest(
+            Thing spreadModel = new Thing(
                 name,
                 requiredUnion,
                 requiredLiteralString,
@@ -872,24 +693,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/FriendlyModel. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult FriendlyModel(BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreateFriendlyModelRequest(content, options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateFriendlyModelRequest(content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -902,24 +714,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/FriendlyModelAsync. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> FriendlyModelAsync(BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreateFriendlyModelRequest(content, options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateFriendlyModelRequest(content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Model can have its friendly name. </summary>
@@ -930,7 +733,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            FriendlyModelRequest spreadModel = new FriendlyModelRequest(name, null);
+            Friend spreadModel = new Friend(name, null);
             ClientResult result = FriendlyModel(spreadModel, null);
             return ClientResult.FromValue((Friend)result, result.GetRawResponse());
         }
@@ -943,7 +746,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            FriendlyModelRequest spreadModel = new FriendlyModelRequest(name, null);
+            Friend spreadModel = new Friend(name, null);
             ClientResult result = await FriendlyModelAsync(spreadModel, null).ConfigureAwait(false);
             return ClientResult.FromValue((Friend)result, result.GetRawResponse());
         }
@@ -957,21 +760,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/AddTimeHeader. </remarks>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult AddTimeHeader(RequestOptions options)
         {
-            try
-            {
-                using PipelineMessage message = CreateAddTimeHeaderRequest(options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateAddTimeHeaderRequest(options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -983,21 +777,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/AddTimeHeaderAsync. </remarks>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> AddTimeHeaderAsync(RequestOptions options)
         {
-            try
-            {
-                using PipelineMessage message = CreateAddTimeHeaderRequest(options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateAddTimeHeaderRequest(options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> addTimeHeader. </summary>
@@ -1024,24 +809,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/ProjectedNameModel. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult ProjectedNameModel(BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreateProjectedNameModelRequest(content, options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateProjectedNameModelRequest(content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -1054,24 +830,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/ProjectedNameModelAsync. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> ProjectedNameModelAsync(BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreateProjectedNameModelRequest(content, options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateProjectedNameModelRequest(content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Model can have its projected name. </summary>
@@ -1082,7 +849,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            ProjectedNameModelRequest spreadModel = new ProjectedNameModelRequest(name, null);
+            ProjectedModel spreadModel = new ProjectedModel(name, null);
             ClientResult result = ProjectedNameModel(spreadModel, null);
             return ClientResult.FromValue((ProjectedModel)result, result.GetRawResponse());
         }
@@ -1095,7 +862,7 @@ namespace UnbrandedTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            ProjectedNameModelRequest spreadModel = new ProjectedNameModelRequest(name, null);
+            ProjectedModel spreadModel = new ProjectedModel(name, null);
             ClientResult result = await ProjectedNameModelAsync(spreadModel, null).ConfigureAwait(false);
             return ClientResult.FromValue((ProjectedModel)result, result.GetRawResponse());
         }
@@ -1109,21 +876,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/ReturnsAnonymousModel. </remarks>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult ReturnsAnonymousModel(RequestOptions options)
         {
-            try
-            {
-                using PipelineMessage message = CreateReturnsAnonymousModelRequest(options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateReturnsAnonymousModelRequest(options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -1135,21 +893,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/ReturnsAnonymousModelAsync. </remarks>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> ReturnsAnonymousModelAsync(RequestOptions options)
         {
-            try
-            {
-                using PipelineMessage message = CreateReturnsAnonymousModelRequest(options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateReturnsAnonymousModelRequest(options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> return anonymous model. </summary>
@@ -1178,24 +927,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="accept"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/GetUnknownValue. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="accept"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult GetUnknownValue(string accept, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(accept, nameof(accept));
+            Argument.AssertNotNull(accept, nameof(accept));
 
-                using PipelineMessage message = CreateGetUnknownValueRequest(accept, options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateGetUnknownValueRequest(accept, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -1208,24 +948,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="accept"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/GetUnknownValueAsync. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="accept"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> GetUnknownValueAsync(string accept, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(accept, nameof(accept));
+            Argument.AssertNotNull(accept, nameof(accept));
 
-                using PipelineMessage message = CreateGetUnknownValueRequest(accept, options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateGetUnknownValueRequest(accept, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> get extensible enum. </summary>
@@ -1262,24 +993,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/InternalProtocol. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult InternalProtocol(BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreateInternalProtocolRequest(content, options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateInternalProtocolRequest(content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -1292,24 +1014,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/InternalProtocolAsync. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> InternalProtocolAsync(BinaryContent content, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-                using PipelineMessage message = CreateInternalProtocolRequest(content, options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateInternalProtocolRequest(content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
@@ -1345,21 +1058,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/StillConvenient. </remarks>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult StillConvenient(RequestOptions options)
         {
-            try
-            {
-                using PipelineMessage message = CreateStillConvenientRequest(options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateStillConvenientRequest(options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -1371,21 +1075,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/StillConvenientAsync. </remarks>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> StillConvenientAsync(RequestOptions options)
         {
-            try
-            {
-                using PipelineMessage message = CreateStillConvenientRequest(options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateStillConvenientRequest(options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
@@ -1412,24 +1107,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="id"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/HeadAsBoolean. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual ClientResult HeadAsBoolean(string id, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(id, nameof(id));
 
-                using PipelineMessage message = CreateHeadAsBooleanRequest(id, options);
-                return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateHeadAsBooleanRequest(id, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -1442,24 +1128,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="id"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <remarks> For more details see http://myservice.com/docs/HeadAsBooleanAsync. </remarks>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<ClientResult> HeadAsBooleanAsync(string id, RequestOptions options)
         {
-            try
-            {
-                Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(id, nameof(id));
 
-                using PipelineMessage message = CreateHeadAsBooleanRequest(id, options);
-                return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-            }
-            catch (ClientResultException exception)
-            {
-                System.Console.WriteLine(exception.Message);
-                throw;
-            }
+            using PipelineMessage message = CreateHeadAsBooleanRequest(id, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> head as boolean. </summary>

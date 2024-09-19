@@ -4,7 +4,7 @@
 
 using System;
 
-namespace UnbrandedTypeSpec
+namespace UnbrandedTypeSpec.Models
 {
     internal static partial class IntFixedEnumExtensions
     {

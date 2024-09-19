@@ -4,8 +4,9 @@
 
 using System;
 using System.ComponentModel;
+using UnbrandedTypeSpec;
 
-namespace UnbrandedTypeSpec
+namespace UnbrandedTypeSpec.Models
 {
     /// <summary> Extensible enum. </summary>
     public readonly partial struct StringExtensibleEnum : IEquatable<StringExtensibleEnum>

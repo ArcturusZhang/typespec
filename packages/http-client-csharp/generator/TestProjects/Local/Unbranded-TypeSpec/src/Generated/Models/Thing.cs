@@ -6,14 +6,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using UnbrandedTypeSpec;
 
-namespace UnbrandedTypeSpec
+namespace UnbrandedTypeSpec.Models
 {
     /// <summary> A model with a few properties of literal types. </summary>
     public partial class Thing
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private protected IDictionary<string, BinaryData> _additionalBinaryDataProperties;
 
         /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
@@ -34,7 +35,7 @@ namespace UnbrandedTypeSpec
             RequiredNullableList = requiredNullableList?.ToList();
         }
 
-        internal Thing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Thing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList, IDictionary<string, BinaryData> additionalBinaryDataProperties)
         {
             Name = name;
             RequiredUnion = requiredUnion;
@@ -49,7 +50,7 @@ namespace UnbrandedTypeSpec
             RequiredBadDescription = requiredBadDescription;
             OptionalNullableList = optionalNullableList;
             RequiredNullableList = requiredNullableList;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            _additionalBinaryDataProperties = additionalBinaryDataProperties;
         }
 
         /// <summary> name of the Thing. </summary>
@@ -100,16 +101,16 @@ namespace UnbrandedTypeSpec
         public BinaryData RequiredUnion { get; set; }
 
         /// <summary> required literal string. </summary>
-        public ThingRequiredLiteralString RequiredLiteralString { get; init; } = "accept";
+        public ThingRequiredLiteralString RequiredLiteralString { get; } = "accept";
 
         /// <summary> required literal int. </summary>
-        public ThingRequiredLiteralInt RequiredLiteralInt { get; init; } = 123;
+        public ThingRequiredLiteralInt RequiredLiteralInt { get; } = 123;
 
         /// <summary> required literal float. </summary>
-        public ThingRequiredLiteralFloat RequiredLiteralFloat { get; init; } = 1.23F;
+        public ThingRequiredLiteralFloat RequiredLiteralFloat { get; } = 1.23F;
 
         /// <summary> required literal bool. </summary>
-        public bool RequiredLiteralBool { get; init; } = false;
+        public bool RequiredLiteralBool { get; } = false;
 
         /// <summary> optional literal string. </summary>
         public ThingOptionalLiteralString? OptionalLiteralString { get; set; }
