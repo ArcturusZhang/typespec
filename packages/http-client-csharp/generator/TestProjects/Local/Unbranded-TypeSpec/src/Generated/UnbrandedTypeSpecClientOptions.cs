@@ -10,7 +10,7 @@ namespace UnbrandedTypeSpec
     /// <summary> Client options for <see cref="UnbrandedTypeSpecClient"/>. </summary>
     public partial class UnbrandedTypeSpecClientOptions : ClientPipelineOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V2024_08_16_Preview;
+        private const ServiceVersion LatestVersion = ServiceVersion.V2024_07_16_Preview;
 
         /// <summary> Initializes a new instance of UnbrandedTypeSpecClientOptions. </summary>
         /// <param name="version"> The service version. </param>
@@ -19,7 +19,6 @@ namespace UnbrandedTypeSpec
             Version = version switch
             {
                 ServiceVersion.V2024_07_16_Preview => "2024-07-16-preview",
-                ServiceVersion.V2024_08_16_Preview => "2024-08-16-preview",
                 _ => throw new NotSupportedException()
             };
         }
@@ -30,9 +29,7 @@ namespace UnbrandedTypeSpec
         public enum ServiceVersion
         {
             /// <summary> V2024_07_16_Preview. </summary>
-            V2024_07_16_Preview = 1,
-            /// <summary> V2024_08_16_Preview. </summary>
-            V2024_08_16_Preview = 2
+            V2024_07_16_Preview = 1
         }
     }
 }
