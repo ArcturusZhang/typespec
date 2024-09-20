@@ -5,6 +5,7 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using Microsoft.Generator.CSharp.ClientModel.Primitives;
 using Microsoft.Generator.CSharp.ClientModel.Providers;
 using Microsoft.Generator.CSharp.Expressions;
 using Microsoft.Generator.CSharp.Input;
@@ -24,9 +25,9 @@ namespace Microsoft.Generator.CSharp.ClientModel
 
         public virtual CSharpType TokenCredentialType => throw new NotImplementedException("Token credential is not supported in Scm libraries yet");
 
-        public virtual Type ClientResponseType => typeof(ClientResult);
+        public virtual ClientResponseType ClientResponseType { get; } = new ClientResponseType(typeof(ClientResult<>));
 
-        public virtual Type ClientResponseOfTType => typeof(ClientResult<>);
+        public virtual ClientResponseType ClientResponseOfTType => new ClientResponseType(typeof(ClientResult<>));
 
         public virtual Type ClientResponseExceptionType => typeof(ClientResultException);
 
