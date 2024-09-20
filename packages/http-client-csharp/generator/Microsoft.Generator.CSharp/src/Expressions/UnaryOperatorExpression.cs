@@ -13,8 +13,5 @@ namespace Microsoft.Generator.CSharp.Expressions
             Operand.Write(writer);
             writer.AppendRawIf(Operator, OperandOnTheLeft);
         }
-
-        private MethodBodyStatement? _terminated;
-        public MethodBodyStatement Terminate() => _terminated ??= new ExpressionStatement(this);
     }
 }

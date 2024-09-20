@@ -22,5 +22,6 @@ namespace Microsoft.Generator.CSharp.Providers
         public XmlDocReturnsStatement? Returns { get; set; }
         public IList<XmlDocExceptionStatement> Exceptions { get; }
         public XmlDocInheritStatement? Inherit { get; set;  }
+        public XmlDocStatement? Remarks { get; set; }
     }
 }

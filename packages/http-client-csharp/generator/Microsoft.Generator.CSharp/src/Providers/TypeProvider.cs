@@ -59,11 +59,16 @@ namespace Microsoft.Generator.CSharp.Providers
         }
 
         private CSharpType? _type;
-        public CSharpType Type => _type ??= new(
-            this,
-            CustomCodeView?.GetNamespace() ?? GetNamespace(),
-            GetTypeArguments(),
-            GetBaseType());
+        public CSharpType Type => _type ??= BuildType();
+
+        protected virtual CSharpType BuildType()
+        {
+            return new(
+                this,
+                CustomCodeView?.GetNamespace() ?? GetNamespace(),
+                GetTypeArguments(),
+                GetBaseType());
+        }
 
         protected virtual bool GetIsEnum() => false;
         public bool IsEnum => GetIsEnum();
@@ -205,7 +210,8 @@ namespace Microsoft.Generator.CSharp.Providers
             IEnumerable<FieldProvider>? fields = null,
             IEnumerable<TypeProvider>? serializations = null,
             IEnumerable<TypeProvider>? nestedTypes = null,
-            XmlDocProvider? xmlDocs = null)
+            XmlDocProvider? xmlDocs = null,
+            string? nameSpace = null)
         {
             if (methods != null)
             {
@@ -234,6 +240,10 @@ namespace Microsoft.Generator.CSharp.Providers
             if (xmlDocs != null)
             {
                 XmlDocs = xmlDocs;
+            }
+            if (nameSpace != null)
+            {
+                Type.Namespace = nameSpace;
             }
         }
         public IReadOnlyList<EnumTypeMember> EnumValues => _enumValues ??= BuildEnumValues();

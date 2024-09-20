@@ -19,14 +19,11 @@ namespace Microsoft.Generator.CSharp.Snippets
             Type = type;
         }
 
-        private MethodBodyStatement? _terminated;
-
         internal override void Write(CodeWriter writer)
         {
             Original.Write(writer);
         }
 
         protected internal override bool IsEmptyExpression() => Original.IsEmptyExpression();
-        public MethodBodyStatement Terminate() => _terminated ??= new ExpressionStatement(this);
     }
 }

@@ -104,7 +104,7 @@ namespace Microsoft.Generator.CSharp.Primitives
 
             Name = type.IsGenericType ? type.Name.Substring(0, type.Name.IndexOf('`')) : type.Name;
             IsValueType = type.IsValueType;
-            Namespace = type.Namespace ?? string.Empty;
+            _namespace = type.Namespace ?? string.Empty;
             IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
             // open generic parameter such as the `T` in `List<T>` is considered as declared inside the `List<T>` type as well, but we just want this to be the pure nested type, therefore here we exclude the open generic parameter scenario
             // for a closed generic parameter such as the `string` in `List<string>`, it is just an ordinary type without a `DeclaringType`.
@@ -172,7 +172,7 @@ namespace Microsoft.Generator.CSharp.Primitives
             Name = name;
             IsValueType = isValueType;
             IsNullable = isNullable;
-            Namespace = ns;
+            _namespace = ns;
             DeclaringType = declaringType;
             IsPublic = isPublic;
             IsStruct = isStruct;
@@ -180,7 +180,19 @@ namespace Microsoft.Generator.CSharp.Primitives
             _underlyingType = underlyingEnumType;
         }
 
-        public string Namespace { get; private init; }
+        private string _namespace;
+        public string Namespace
+        {
+            get => _namespace;
+            internal set
+            {
+                if (IsFrameworkType)
+                {
+                    throw new InvalidOperationException("Cannot set namespace for framework types.");
+                }
+                _namespace = value;
+            }
+        }
         public string Name { get; private init; }
         public CSharpType? DeclaringType { get; private init; }
         public bool IsValueType { get; private init; }

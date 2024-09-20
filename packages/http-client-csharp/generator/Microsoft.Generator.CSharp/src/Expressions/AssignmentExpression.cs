@@ -25,8 +25,5 @@ namespace Microsoft.Generator.CSharp.Expressions
             }
             Value.Write(writer);
         }
-
-        private MethodBodyStatement? _terminated;
-        public MethodBodyStatement Terminate() => _terminated ??= new ExpressionStatement(this);
     }
 }

@@ -244,6 +244,11 @@ namespace Microsoft.Generator.CSharp
                 param.Write(this);
             }
 
+            if (docs.Remarks is not null)
+            {
+                docs.Remarks.Write(this);
+            }
+
             foreach (var exception in docs.Exceptions)
             {
                 exception.Write(this);
@@ -308,13 +313,20 @@ namespace Microsoft.Generator.CSharp
                         }
                     }
                     break;
-                case AutoPropertyBody(var hasSetter, var setterModifiers, var initialization):
+                case AutoPropertyBody(var hasSetter, var setterModifiers, var initialization, var useInit):
                     AppendRaw(" { get;");
                     if (hasSetter)
                     {
                         AppendRaw(" ");
                         WritePropertyAccessorModifiers(setterModifiers);
-                        AppendRaw("set;");
+                        if (useInit)
+                        {
+                            AppendRaw("init;");
+                        }
+                        else
+                        {
+                            AppendRaw("set;");
+                        }
                     }
                     AppendRaw(" }");
                     if (initialization is not null)
