@@ -13,7 +13,6 @@ import {
 
 import { spawn, SpawnOptions } from "child_process";
 import fs, { statSync } from "fs";
-import { PreserveType, stringifyRefs } from "json-serialize-refs";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { configurationFileName, tspOutputFileName } from "./constants.js";
@@ -76,9 +75,19 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         fs.mkdirSync(generatedFolder, { recursive: true });
       }
 
+      const cache = new Map<any, string>();
       await program.host.writeFile(
         resolvePath(outputFolder, tspOutputFileName),
-        prettierOutput(stringifyRefs(root, transformJSONProperties, 1, PreserveType.Objects)),
+        // prettierOutput(stringifyRefs(root, transformJSONProperties, 1, PreserveType.Objects)),
+        prettierOutput(
+          JSON.stringify(
+            root,
+            function (this: any, key: string, value: any): any {
+              return stringifyRefsReplacer(value, cache);
+            },
+            1,
+          ),
+        ),
       );
 
       //emit configuration.json
@@ -219,23 +228,45 @@ async function execAsync(
   });
 }
 
-function transformJSONProperties(this: any, key: string, value: any): any {
-  // convertUsageNumbersToStrings
-  if (this["kind"] === "model" || this["kind"] === "enum") {
-    if (key === "usage" && typeof value === "number") {
-      if (value === 0) {
-        return "None";
-      }
-      const result: string[] = [];
-      for (const prop in UsageFlags) {
-        if (!isNaN(Number(prop))) {
-          if ((value & Number(prop)) !== 0) {
-            result.push(UsageFlags[prop]);
-          }
+function stringifyRefsReplacer(value: any, cache: Map<any, string>): any {
+  if (value && Array.isArray(value)) {
+    const result: any[] = [];
+    for (const item of value) {
+      result.push(stringifyRefsReplacer(item, cache));
+    }
+    return result;
+  } else if (value && typeof value === "object") {
+    if (cache.has(value)) {
+      return { $ref: cache.get(value) };
+    } else {
+      const id = (cache.size + 1).toString();
+      cache.set(value, id);
+      return { $id: id, ...transformModelUsageProperty(value) };
+    }
+  }
+  return value;
+}
+
+function transformModelUsageProperty(value: any): any {
+  if (!value) return value;
+  if (value["kind"] === "model" || value["kind"] === "enum") {
+    const usage = value["usage"];
+    if (!usage || typeof usage !== "number") {
+      return value;
+    }
+    if (usage === 0) {
+      return "None";
+    }
+    const result: string[] = [];
+    for (const prop in UsageFlags) {
+      if (!isNaN(Number(prop))) {
+        if ((usage & Number(prop)) !== 0) {
+          result.push(UsageFlags[prop]);
         }
       }
-      return result.join(",");
     }
+    // change the content of usage
+    value["usage"] = result.join(",");
   }
 
   return value;

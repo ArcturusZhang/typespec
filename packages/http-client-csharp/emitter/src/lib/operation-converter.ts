@@ -35,11 +35,11 @@ import { OperationResponse } from "../type/operation-response.js";
 import { RequestLocation } from "../type/request-location.js";
 import { parseHttpRequestMethod } from "../type/request-method.js";
 import { SdkTypeMap } from "../type/sdk-type-map.js";
-import { fromSdkType } from "./converter.js";
 import { getExternalDocs, getOperationId } from "./decorators.js";
 import { fromSdkHttpExamples } from "./example-converter.js";
 import { Logger } from "./logger.js";
 import { getInputType } from "./model.js";
+import { fromSdkType } from "./type-converter.js";
 import { capitalize, isSdkPathParameter } from "./utils.js";
 
 export function fromSdkServiceMethod(
