@@ -86,7 +86,9 @@ namespace Microsoft.TypeSpec.Generator.Providers
 
         private string? _relativeFilePath;
 
-        public string Name => Type.Name;
+        public string Name => _name ??= CustomCodeView?.Name ?? BuildName();
+        public string Namespace => _namespace ??= CustomCodeView?.Namespace ?? BuildNamespace();
+        public IReadOnlyList<TypeProvider> Arguments { get; } = []; // TODO -- this needs to call the new GetArguments method.
 
         protected virtual FormattableString Description { get; } = FormattableStringHelpers.Empty;
 
@@ -105,8 +107,10 @@ namespace Microsoft.TypeSpec.Generator.Providers
         }
 
         private string? _name;
+        private string? _namespace;
         private CSharpType? _type;
         private CSharpType[]? _arguments;
+        // TODO -- we could remove it once everything is converted.
         public CSharpType Type => _type ??=
             new(
                 _name ??= CustomCodeView?.Name ?? BuildName(),
